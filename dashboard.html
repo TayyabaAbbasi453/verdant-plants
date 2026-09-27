@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — Verdant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+<style>
+  .dash-page {
+    min-height: 100vh;
+    padding-top: 100px;
+    background: var(--surface);
+  }
+  .dash-avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: #fff;
+    font-size: 2.4rem;
+    font-family: var(--font-display);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+  }
+  .dash-sidebar {
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-soft);
+  }
+  .dash-nav-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: var(--radius-sm);
+    color: var(--text); font-weight: 500; font-size: .92rem;
+    transition: var(--transition);
+    border: none; background: none; width: 100%; text-align: left;
+  }
+  .dash-nav-link:hover { background: var(--surface); color: var(--dark-green); }
+  .dash-nav-link.active { background: linear-gradient(135deg, var(--primary-green), var(--dark-green)); color: #fff; }
+  .dash-nav-link i { font-size: 1rem; width: 20px; text-align: center; }
+  .dash-panel {
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-soft);
+    display: none;
+  }
+  .dash-panel.active { display: block; animation: fadeUp .4s ease; }
+  .stat-chip {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    text-align: center;
+    border: 1px solid var(--border-soft);
+  }
+  .stat-chip .num { font-size: 2rem; font-weight: 700; font-family: var(--font-display); color: var(--dark-green); }
+  [data-theme="dark"] .stat-chip .num { color: var(--accent-gold); }
+</style>
+</head>
+<body>
+
+<div class="page-loader"><i class="bi bi-tree-fill loader-leaf"></i></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand brand-logo" href="index.html"><i class="bi bi-flower1"></i>Verdant</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><i class="bi bi-list fs-2"></i></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Pages/Shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="Pages/About.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="Pages/Contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="icon-btn dark-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <a href="Pages/Wishlist.html" class="icon-btn position-relative" aria-label="Wishlist">
+          <i class="bi bi-heart"></i><span class="badge-count wishlist-badge" style="display:none;">0</span>
+        </a>
+        <a href="Pages/Cart.html" class="icon-btn position-relative" aria-label="Cart">
+          <i class="bi bi-bag"></i><span class="badge-count cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="#" class="btn btn-outline-leaf btn-sm logout-btn">Logout</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="dash-page" id="dashboardWrap">
+  <div class="container py-4">
+
+    <!-- Header bar -->
+    <div class="d-flex flex-wrap align-items-center gap-4 mb-4 p-4 bg-white rounded-4 shadow-sm" style="background:var(--bg) !important;">
+      <div class="dash-avatar" id="dashInitial">U</div>
+      <div class="flex-grow-1">
+        <h4 class="font-display mb-0" id="dashName">Loading…</h4>
+        <div class="text-muted small" id="dashEmail">—</div>
+      </div>
+      <div class="row g-3 text-center">
+        <div class="col">
+          <div class="stat-chip" style="min-width:90px;">
+            <div class="num" id="dashCartCount">0</div>
+            <div class="text-muted" style="font-size:.75rem;">In Cart</div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="stat-chip" style="min-width:90px;">
+            <div class="num" id="dashWishCount">0</div>
+            <div class="text-muted" style="font-size:.75rem;">Wishlisted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Sidebar nav -->
+      <div class="col-lg-3">
+        <div class="dash-sidebar">
+          <button class="dash-nav-link active" data-tab="overview"><i class="bi bi-grid"></i> Overview</button>
+          <button class="dash-nav-link mt-1" data-tab="profile"><i class="bi bi-person"></i> Edit Profile</button>
+          <button class="dash-nav-link mt-1" data-tab="wishlist"><i class="bi bi-heart"></i> My Wishlist</button>
+          <button class="dash-nav-link mt-1" data-tab="cart"><i class="bi bi-bag"></i> Saved Cart</button>
+          <hr>
+          <button class="dash-nav-link logout-btn text-danger"><i class="bi bi-box-arrow-right"></i> Logout</button>
+        </div>
+      </div>
+
+      <!-- Panels -->
+      <div class="col-lg-9">
+
+        <!-- Overview -->
+        <div class="dash-panel active" id="tab-overview">
+          <h5 class="font-display mb-4">Dashboard Overview</h5>
+          <div class="row g-4">
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 h-100" style="background:var(--surface); border:1px solid var(--border-soft);">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <div class="feature-icon" style="width:40px;height:40px;font-size:1rem;flex-shrink:0;"><i class="bi bi-heart-fill"></i></div>
+                  <strong>Wishlist Preview</strong>
+                </div>
+                <div id="dashWishlistPreview"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line mt-2"></div></div>
+                <a href="Pages/Wishlist.html" class="btn btn-outline-leaf btn-sm mt-3">View Full Wishlist</a>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="p-3 rounded-3 h-100" style="background:var(--surface); border:1px solid var(--border-soft);">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <div class="feature-icon" style="width:40px;height:40px;font-size:1rem;flex-shrink:0;"><i class="bi bi-bag-fill"></i></div>
+                  <strong>Cart Preview</strong>
+                </div>
+                <div id="dashCartPreview"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line mt-2"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick links -->
+          <div class="mt-4">
+            <h6 class="mb-3">Quick Links</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="Pages/Shop.html" class="btn btn-leaf btn-sm"><i class="bi bi-bag me-1"></i>Browse Shop</a>
+              <a href="Pages/Wishlist.html" class="btn btn-outline-leaf btn-sm"><i class="bi bi-heart me-1"></i>Wishlist</a>
+              <a href="Pages/Cart.html" class="btn btn-outline-leaf btn-sm"><i class="bi bi-cart me-1"></i>Cart</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit Profile -->
+        <div class="dash-panel" id="tab-profile">
+          <h5 class="font-display mb-4">Edit Profile</h5>
+          <form id="editProfileForm" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold" for="editName">Full Name</label>
+                <input type="text" id="editName" class="form-control" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold" for="editEmail">Email Address</label>
+                <input type="email" id="editEmail" class="form-control" required>
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-leaf">Save Changes</button>
+              </div>
+            </div>
+          </form>
+
+          <hr class="my-4">
+          <h6 class="mb-3 text-danger">Danger Zone</h6>
+          <button class="btn btn-outline-danger btn-sm" onclick="
+            if(confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+              const users = VERDANT.getJSON(VERDANT.KEYS.USERS, []);
+              const user = VERDANT.getJSON(VERDANT.KEYS.CURRENT_USER, null);
+              const filtered = users.filter(u => u.id !== user?.id);
+              VERDANT.setJSON(VERDANT.KEYS.USERS, filtered);
+              localStorage.removeItem(VERDANT.KEYS.CURRENT_USER);
+              VERDANT.toast('Account deleted', 'info');
+              setTimeout(() => location.href = 'index.html', 800);
+            }">
+            <i class="bi bi-trash me-1"></i>Delete Account
+          </button>
+        </div>
+
+        <!-- Wishlist tab -->
+        <div class="dash-panel" id="tab-wishlist">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="font-display mb-0">My Wishlist</h5>
+            <a href="Pages/Wishlist.html" class="btn btn-outline-leaf btn-sm">Full Wishlist Page</a>
+          </div>
+          <div id="dashWishlistFull"></div>
+        </div>
+
+        <!-- Cart tab -->
+        <div class="dash-panel" id="tab-cart">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="font-display mb-0">Saved Cart</h5>
+            <a href="Pages/Cart.html" class="btn btn-leaf btn-sm">Go to Cart</a>
+          </div>
+          <div id="dashCartFull"></div>
+        </div>
+
+      </div><!-- /col -->
+    </div><!-- /row -->
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="index.html" class="brand-logo d-inline-block mb-3" style="color:#fff !important;"><i class="bi bi-flower1"></i>Verdant</a>
+        <p class="text-light small">Premium, sustainably grown plants delivered to your door.</p>
+        <div class="footer-social mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Pages/Shop.html">Shop</a></li>
+          <li><a href="Pages/About.html">About</a></li>
+          <li><a href="Pages/Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>My Account</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="Pages/Wishlist.html">Wishlist</a></li>
+          <li><a href="Pages/Cart.html">Cart</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6>Newsletter</h6>
+        <form class="d-flex gap-2 newsletter-form">
+          <input type="email" class="form-control form-control-sm" placeholder="Email address" required>
+          <button class="btn btn-leaf btn-sm" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom text-center text-light">&copy; 2026 Verdant Plant Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/detail.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Tab switching
+  const navBtns = document.querySelectorAll('.dash-nav-link[data-tab]');
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      navBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+      const tab = document.getElementById('tab-' + this.dataset.tab);
+      if (tab) tab.classList.add('active');
+      if (this.dataset.tab === 'wishlist') renderDashWishlist();
+      if (this.dataset.tab === 'cart') renderDashCart();
+    });
+  });
+
+  function renderDashWishlist() {
+    const wrap = document.getElementById('dashWishlistFull');
+    if (!wrap) return;
+    const list = VERDANT.getJSON(VERDANT.KEYS.WISHLIST, []);
+    if (!list.length) { wrap.innerHTML = '<p class="text-muted">Nothing saved yet. <a href="Pages/Shop.html">Browse plants</a></p>'; return; }
+    wrap.innerHTML = list.map(item => `
+      <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+        <img src="${item.image}" class="rounded-3" style="width:70px;height:70px;object-fit:cover;" alt="${item.name}">
+        <div class="flex-grow-1">
+          <div class="fw-semibold">${item.name}</div>
+          <div class="text-muted small">${item.category}</div>
+        </div>
+        <div class="fw-bold text-dark-green">${VERDANT.formatPrice(item.price)}</div>
+        <a href="Pages/Detail.html?id=${item.id}" class="btn btn-leaf btn-sm">View</a>
+      </div>`).join('');
+  }
+
+  function renderDashCart() {
+    const wrap = document.getElementById('dashCartFull');
+    if (!wrap) return;
+    const cart = VERDANT.getJSON(VERDANT.KEYS.CART, []);
+    if (!cart.length) { wrap.innerHTML = '<p class="text-muted">Your cart is empty. <a href="Pages/Shop.html">Shop now</a></p>'; return; }
+    const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    wrap.innerHTML = cart.map(item => `
+      <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+        <img src="${item.image}" class="rounded-3" style="width:70px;height:70px;object-fit:cover;" alt="${item.name}">
+        <div class="flex-grow-1">
+          <div class="fw-semibold">${item.name}</div>
+          <div class="text-muted small">Qty: ${item.qty}</div>
+        </div>
+        <div class="fw-bold text-dark-green">${VERDANT.formatPrice(item.price * item.qty)}</div>
+      </div>`).join('') + `
+      <div class="d-flex justify-content-between align-items-center pt-3">
+        <strong>Subtotal: ${VERDANT.formatPrice(subtotal)}</strong>
+        <a href="Pages/Cart.html" class="btn btn-leaf btn-sm">Checkout</a>
+      </div>`;
+  }
+});
+</script>
+</body>
+</html>
