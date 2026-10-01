@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Details — Verdant</title>
+<meta name="description" content="View detailed information, care guides, and customer reviews for this plant.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+<style>
+/* ---- Gallery ---- */
+.main-img-wrap {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--surface);
+  box-shadow: var(--shadow-lift);
+}
+.main-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+  cursor: zoom-in;
+}
+.main-img-wrap:hover img { transform: scale(1.06); }
+
+.img-badge-wrap {
+  position: absolute; top: 18px; left: 18px;
+  display: flex; flex-direction: column; gap: 8px; z-index: 2;
+}
+
+.thumb-strip {
+  display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;
+}
+.thumb-strip img {
+  width: 76px; height: 76px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  cursor: pointer;
+  border: 2.5px solid transparent;
+  transition: var(--transition);
+  opacity: .75;
+}
+.thumb-strip img:hover,
+.thumb-strip img.active {
+  border-color: var(--primary-green);
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---- Info panel ---- */
+.info-panel { position: sticky; top: 100px; }
+
+.price-block { display: flex; align-items: baseline; gap: 12px; }
+.price-main  { font-size: 2rem; font-weight: 700; color: var(--dark-green); font-family: var(--font-display); }
+[data-theme="dark"] .price-main { color: var(--accent-gold); }
+.price-old   { font-size: 1.1rem; color: #9aa39c; text-decoration: line-through; }
+.price-save  { font-size: .78rem; background: rgba(76,175,80,.12); color: var(--dark-green); padding: 3px 10px; border-radius: 50px; font-weight: 600; }
+
+.rating-row { display: flex; align-items: center; gap: 10px; }
+.stars-gold { color: var(--accent-gold); font-size: 1rem; letter-spacing: .05em; }
+.reviews-link { font-size: .82rem; color: var(--ink-soft); text-decoration: underline; cursor: pointer; }
+
+.stock-bar-wrap { margin-top: 4px; }
+.stock-bar { height: 5px; border-radius: 4px; background: var(--surface); }
+.stock-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--primary-green), var(--dark-green)); transition: width .8s ease; }
+
+.tag-pill {
+  display: inline-block; background: var(--surface);
+  border: 1px solid var(--border-soft);
+  color: var(--text); font-size: .75rem;
+  padding: 4px 12px; border-radius: 50px;
+}
+
+/* ---- Trust badges ---- */
+.trust-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.trust-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: .8rem; color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  flex: 1; min-width: 130px;
+}
+.trust-item i { color: var(--primary-green); font-size: 1.1rem; flex-shrink: 0; }
+
+/* ---- Tabs ---- */
+.detail-tabs .nav-link {
+  color: var(--ink-soft);
+  font-weight: 500;
+  border: none; border-bottom: 2.5px solid transparent;
+  border-radius: 0; padding: .75rem 1.2rem;
+  transition: var(--transition);
+}
+.detail-tabs .nav-link:hover { color: var(--dark-green); }
+.detail-tabs .nav-link.active {
+  color: var(--dark-green);
+  border-bottom-color: var(--dark-green);
+  background: none;
+  font-weight: 600;
+}
+[data-theme="dark"] .detail-tabs .nav-link.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
+.tab-section { border-top: 1px solid var(--border-soft); padding-top: 28px; }
+
+/* ---- Care guide ---- */
+.care-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  text-align: center;
+  border: 1px solid var(--border-soft);
+}
+.care-icon { font-size: 1.8rem; margin-bottom: 8px; }
+
+/* ---- Review ---- */
+.review-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  border: 1px solid var(--border-soft);
+}
+.reviewer-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  object-fit: cover;
+}
+.review-stars { color: var(--accent-gold); font-size: .85rem; }
+
+/* ---- Sticky mobile CTA ---- */
+.sticky-cta {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--border-soft);
+  padding: 14px 20px;
+  display: none;
+  z-index: 900;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.08);
+}
+@media (max-width: 991px) { .sticky-cta { display: flex; gap: 12px; } }
+
+/* ---- Share button ---- */
+.share-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .82rem; color: var(--ink-soft);
+  background: none; border: 1px solid var(--border-soft);
+  border-radius: 50px; padding: 6px 14px;
+  transition: var(--transition); cursor: pointer;
+}
+.share-btn:hover { border-color: var(--primary-green); color: var(--primary-green); }
+
+/* ---- Skeleton details ---- */
+.skeleton-detail-img { aspect-ratio: 4/5; border-radius: var(--radius-lg); }
+</style>
+</head>
+<body>
+
+<div class="page-loader"><i class="bi bi-tree-fill loader-leaf"></i></div>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand brand-logo" href="/index.html"><i class="bi bi-flower1"></i>Verdant</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <i class="bi bi-list fs-2"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="icon-btn dark-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <a href="Wishlist.html" class="icon-btn position-relative" aria-label="Wishlist">
+          <i class="bi bi-heart"></i><span class="badge-count wishlist-badge" style="display:none;">0</span>
+        </a>
+        <a href="Cart.html" class="icon-btn position-relative" aria-label="Cart">
+          <i class="bi bi-bag"></i><span class="badge-count cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="../Login.html" class="btn btn-leaf btn-sm auth-guest-only">Login</a>
+        <a href="../dashboard.html" class="icon-btn auth-user-only" style="display:none;" aria-label="Dashboard"><i class="bi bi-person"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Breadcrumb ===== -->
+<header class="page-band" style="padding:120px 0 28px;">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb-custom d-flex align-items-center gap-2 mb-0" style="list-style:none;padding:0;">
+        <li><a href="/index.html">Home</a></li>
+        <li><i class="bi bi-chevron-right" style="font-size:.7rem;"></i></li>
+        <li><a href="Shop.html">Shop</a></li>
+        <li><i class="bi bi-chevron-right" style="font-size:.7rem;"></i></li>
+        <li id="detailsCrumb" class="text-muted">Plant</li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== Main Details ===== -->
+<section class="section-pad pt-3" id="detailsWrap">
+  <div class="container">
+
+    <!-- Skeleton -->
+    <div id="detailsSkeleton" class="row g-5">
+      <div class="col-lg-6">
+        <div class="skeleton skeleton-detail-img"></div>
+        <div class="d-flex gap-2 mt-3">
+          <div class="skeleton rounded-3" style="width:76px;height:76px;"></div>
+          <div class="skeleton rounded-3" style="width:76px;height:76px;"></div>
+          <div class="skeleton rounded-3" style="width:76px;height:76px;"></div>
+        </div>
+      </div>
+      <div class="col-lg-6 pt-3">
+        <div class="skeleton skeleton-line" style="width:30%;height:12px;"></div>
+        <div class="skeleton skeleton-line mt-3" style="height:32px;width:75%;"></div>
+        <div class="skeleton skeleton-line mt-2" style="height:20px;width:45%;"></div>
+        <div class="skeleton skeleton-line mt-3" style="height:40px;width:35%;"></div>
+        <div class="skeleton skeleton-line mt-4" style="height:90px;"></div>
+        <div class="skeleton skeleton-line mt-3" style="height:50px;"></div>
+        <div class="skeleton skeleton-line mt-2" style="height:50px;width:60%;"></div>
+      </div>
+    </div>
+
+    <!-- Real content -->
+    <div id="detailsContent" class="row g-5" style="display:none !important;">
+
+      <!-- LEFT: Gallery -->
+      <div class="col-lg-6">
+        <div class="main-img-wrap" id="mainImgWrap">
+          <div class="img-badge-wrap" id="imgBadgeWrap"></div>
+          <img id="mainImage" src="" alt="" loading="eager">
+        </div>
+        <div class="thumb-strip" id="galleryThumbs"></div>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="col-lg-6">
+        <div class="info-panel">
+
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="product-cat" id="detailsCat"></span>
+            <div class="d-flex gap-2">
+              <button class="share-btn" id="shareBtn"><i class="bi bi-share"></i> Share</button>
+              <button class="share-btn" onclick="navigator.clipboard.writeText(location.href).then(()=>VERDANT.toast('Link copied!','success'))"><i class="bi bi-link-45deg"></i></button>
+            </div>
+          </div>
+
+          <h1 class="font-display mb-2" id="detailsName" style="font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.15;"></h1>
+
+          <div class="rating-row mb-3">
+            <span class="stars-gold" id="detailsStars"></span>
+            <span class="fw-semibold" id="detailsRatingNum"></span>
+            <a class="reviews-link" id="detailsReviewCount" onclick="document.getElementById('tab-reviews-btn').click();document.getElementById('reviewsTab').scrollIntoView({behavior:'smooth'})"></a>
+          </div>
+
+          <div class="price-block mb-3" id="detailsPrice"></div>
+
+          <div class="mb-4" id="detailsStockWrap">
+            <div class="d-flex justify-content-between mb-1">
+              <span id="detailsStock" class="fw-semibold small"></span>
+              <span class="text-muted small" id="stockPercent"></span>
+            </div>
+            <div class="stock-bar stock-bar-wrap">
+              <div class="stock-bar-fill" id="stockBarFill" style="width:0%"></div>
+            </div>
+          </div>
+
+          <p class="text-muted mb-4" id="detailsDesc" style="line-height:1.75;"></p>
+
+          <div class="mb-4" id="detailsTags"></div>
+
+          <div class="row g-3 mb-4" id="detailsMeta">
+            <div class="col-6">
+              <div class="care-card">
+                <div class="care-icon">💧</div>
+                <div class="fw-semibold small mb-1">Watering</div>
+                <div class="text-muted" style="font-size:.78rem;" id="metaWater">—</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="care-card">
+                <div class="care-icon">☀️</div>
+                <div class="fw-semibold small mb-1">Light</div>
+                <div class="text-muted" style="font-size:.78rem;" id="metaLight">—</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="care-card">
+                <div class="care-icon">📏</div>
+                <div class="fw-semibold small mb-1">Size</div>
+                <div class="text-muted" style="font-size:.78rem;" id="metaSize">—</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="care-card">
+                <div class="care-icon">🌡️</div>
+                <div class="fw-semibold small mb-1">Difficulty</div>
+                <div class="text-muted" style="font-size:.78rem;" id="metaDiff">Easy</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+            <span class="fw-semibold">Quantity</span>
+            <div class="qty-stepper">
+              <button type="button" id="qtyMinus"><i class="bi bi-dash"></i></button>
+              <input type="number" id="detailsQty" value="1" min="1">
+              <button type="button" id="qtyPlus"><i class="bi bi-plus"></i></button>
+            </div>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap mb-4">
+            <button class="btn btn-leaf btn-lg flex-grow-1" id="addToCartBtn">
+              <i class="bi bi-bag-plus me-2"></i>Add to Cart
+            </button>
+            <button class="btn btn-outline-leaf btn-lg" id="addToWishlistBtn" style="min-width:54px;">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-item"><i class="bi bi-truck"></i><span>Free shipping over $60</span></div>
+            <div class="trust-item"><i class="bi bi-arrow-repeat"></i><span>14-day returns</span></div>
+            <div class="trust-item"><i class="bi bi-shield-check"></i><span>Healthy guarantee</span></div>
+            <div class="trust-item"><i class="bi bi-recycle"></i><span>Eco packaging</span></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Tabs ===== -->
+    <div id="detailsTabs" style="display:none;" class="mt-5">
+      <ul class="nav detail-tabs" id="productTabNav" style="border-bottom:1px solid var(--border-soft);">
+        <li class="nav-item"><button class="nav-link active" data-tab="description">Description</button></li>
+        <li class="nav-item"><button class="nav-link" data-tab="care">Care Guide</button></li>
+        <li class="nav-item"><button class="nav-link" id="tab-reviews-btn" data-tab="reviews">Reviews <span class="badge rounded-pill ms-1" style="background:var(--primary-green);font-size:.7rem;" id="reviewBadge">0</span></button></li>
+      </ul>
+
+      <div class="tab-section" id="tab-description">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-7">
+            <h4 class="font-display mb-3">About This Plant</h4>
+            <p class="text-muted" id="tabDesc" style="line-height:1.8;"></p>
+            <ul class="list-unstyled mt-3 d-flex flex-column gap-2" id="tabBullets"></ul>
+          </div>
+          <div class="col-lg-5">
+            <div class="rounded-4 overflow-hidden shadow-sm">
+              <img id="tabDescImg" src="" alt="" class="w-100" style="aspect-ratio:4/3;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-section" id="tab-care" style="display:none;">
+        <h4 class="font-display mb-4">Care Guide</h4>
+        <div class="row g-3" id="careGrid"></div>
+      </div>
+
+      <div class="tab-section" id="tab-reviews" id="reviewsTab" style="display:none;">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="text-center p-4 rounded-4" style="background:var(--surface);">
+              <div class="font-display" style="font-size:4rem;font-weight:700;color:var(--dark-green);" id="avgRating">0.0</div>
+              <div class="stars-gold fs-5 mb-1" id="avgStars"></div>
+              <div class="text-muted small" id="avgCount"></div>
+              <hr>
+              <div id="ratingBars"></div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="d-flex flex-column gap-3" id="reviewsList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products -->
+    <div id="relatedSection" class="mt-5 pt-3" style="display:none;">
+      <div class="divider-leaf mb-3 reveal"><span class="eyebrow">More to Explore</span></div>
+      <h3 class="section-title mb-4 reveal">Related Plants</h3>
+      <div class="row g-4" id="relatedGrid"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <div class="flex-grow-1">
+    <div class="fw-semibold small" id="stickyName"></div>
+    <div class="product-price" id="stickyPrice"></div>
+  </div>
+  <button class="btn btn-leaf flex-shrink-0" id="stickyAddBtn"><i class="bi bi-bag-plus me-1"></i>Add to Cart</button>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="/index.html" class="brand-logo d-inline-block mb-3" style="color:#fff !important;"><i class="bi bi-flower1"></i>Verdant</a>
+        <p class="text-light small">Premium, sustainably grown plants delivered straight to your door.</p>
+        <div class="footer-social mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="Shop.html">Shop</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Categories</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="Shop.html?category=Indoor%20Plants">Indoor Plants</a></li>
+          <li><a href="Shop.html?category=Outdoor%20Plants">Outdoor Plants</a></li>
+          <li><a href="Shop.html?category=Succulents">Succulents</a></li>
+          <li><a href="Shop.html?category=Hanging%20Plants">Hanging Plants</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6>Newsletter</h6>
+        <form class="d-flex gap-2 newsletter-form">
+          <input type="email" class="form-control form-control-sm" placeholder="Email address" required>
+          <button class="btn btn-leaf btn-sm" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom text-center text-light">&copy; 2026 Verdant Plant Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>
+<script src="/js/products.js"></script>
+<script src="/js/detail.js"></script>
+
+
+</body>
+</html>

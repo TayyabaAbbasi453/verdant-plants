@@ -1,0 +1,43 @@
+/* ==========================================================================
+   VERDANT — Responsive overrides
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .hero { min-height: auto; padding: 130px 0 60px; text-align: center; }
+  .hero p.lead { margin-left: auto; margin-right: auto; }
+  .hero-visual { margin-top: 40px; }
+  .hero-blob { width: 320px; height: 320px; }
+  .page-band { padding: 120px 0 40px; }
+}
+
+@media (max-width: 768px) {
+  .navbar-glass .navbar-collapse {
+    background: var(--bg);
+    margin-top: 12px;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    box-shadow: var(--shadow-soft);
+  }
+  .navbar-glass .nav-link { margin: 0; padding: .55rem 0 !important; }
+  .cat-card { height: 220px; }
+  .newsletter-section { padding: 40px 22px; text-align: center; }
+  .product-card.list-view .product-img-wrap { width: 100%; aspect-ratio: 4/5; }
+  .filter-card { margin-bottom: 24px; }
+}
+
+@media (max-width: 576px) {
+  .section-pad { padding: 48px 0; }
+  .hero h1 { font-size: 2.2rem; }
+  .counter-num { font-size: 2rem; }
+  .toast-stack { left: 12px; right: 12px; }
+  .back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

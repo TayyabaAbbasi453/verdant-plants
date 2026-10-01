@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Verdant</title>
+<meta name="description" content="Get in touch with the Verdant team. We're here to help with your plant questions, orders, and care advice.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+<style>
+  .contact-info-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: 28px 22px;
+    text-align: center;
+    height: 100%;
+    transition: var(--transition);
+  }
+  .contact-info-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lift); }
+  .contact-info-icon {
+    width: 58px; height: 58px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: #fff; font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px;
+  }
+  .contact-form-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 44px 40px;
+    box-shadow: var(--shadow-soft);
+  }
+  @media (max-width: 576px) { .contact-form-card { padding: 28px 20px; } }
+  .map-wrap {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    height: 400px;
+  }
+  .map-wrap iframe { width: 100%; height: 100%; border: 0; filter: saturate(0.85) brightness(1); }
+  [data-theme="dark"] .map-wrap iframe { filter: invert(0.92) hue-rotate(180deg) saturate(0.6); }
+  .social-circle {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text); font-size: 1.1rem;
+    transition: var(--transition);
+  }
+  .social-circle:hover { background: var(--primary-green); color: #fff; border-color: var(--primary-green); transform: translateY(-3px); }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq-item summary::after { content: '+'; font-size: 1.2rem; color: var(--primary-green); }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p { padding: 12px 0 4px; color: var(--ink-soft); }
+  [data-theme="dark"] .faq-item p { color: #B9C9BD; }
+</style>
+</head>
+<body>
+
+<div class="page-loader"><i class="bi bi-tree-fill loader-leaf"></i></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand brand-logo" href="index.html"><i class="bi bi-flower1"></i>Verdant</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><i class="bi bi-list fs-2"></i></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="Contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="icon-btn dark-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <a href="/Wishlist.html" class="icon-btn position-relative" aria-label="Wishlist">
+          <i class="bi bi-heart"></i><span class="badge-count wishlist-badge" style="display:none;">0</span>
+        </a>
+        <a href="/Cart.html" class="icon-btn position-relative" aria-label="Cart">
+          <i class="bi bi-bag"></i><span class="badge-count cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="../Login.html" class="btn btn-leaf btn-sm auth-guest-only">Login</a>
+        <a href="../dashboard.html" class="icon-btn auth-user-only" style="display:none;" aria-label="Dashboard"><i class="bi bi-person"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Band -->
+<header class="page-band">
+  <div class="container">
+    <span class="eyebrow">We're Here to Help</span>
+    <h1 class="section-title">Contact Us</h1>
+    <div class="breadcrumb-custom"><a href="/index.html">Home</a> / <span>Contact</span></div>
+  </div>
+</header>
+
+<!-- ===== Info Cards ===== -->
+<section class="section-pad pb-0">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+          <h6>Visit Us</h6>
+          <p class="text-muted small mb-0">Clifton Block 5, Karachi, Pakistan</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+          <h6>Email Us</h6>
+          <p class="text-muted small mb-0">hello@verdantplants.com<br>orders@verdantplants.com</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+          <h6>Call Us</h6>
+          <p class="text-muted small mb-0">+92 300 1234567<br>Mon–Sat, 9am–6pm</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
+          <h6>Working Hours</h6>
+          <p class="text-muted small mb-0">Mon–Sat: 9am–6pm<br>Sunday: Closed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Form + Map ===== -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+
+      <!-- Contact Form -->
+      <div class="col-lg-6 reveal">
+        <div class="contact-form-card">
+          <span class="eyebrow">Drop Us a Line</span>
+          <h3 class="font-display mt-1 mb-4">Send a Message</h3>
+
+          <form id="contactForm" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold" for="contactName">Full Name <span class="text-danger">*</span></label>
+                <input type="text" id="contactName" class="form-control" placeholder="Your name" required>
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold" for="contactEmail">Email <span class="text-danger">*</span></label>
+                <input type="email" id="contactEmail" class="form-control" placeholder="you@example.com" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold" for="contactSubject">Subject <span class="text-danger">*</span></label>
+                <select id="contactSubject" class="form-select" required>
+                  <option value="">Select a topic…</option>
+                  <option>Order Enquiry</option>
+                  <option>Plant Care Advice</option>
+                  <option>Wholesale / Bulk Order</option>
+                  <option>Return or Refund</option>
+                  <option>Partnership</option>
+                  <option>Other</option>
+                </select>
+                <div class="invalid-feedback">Please select a subject.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold" for="contactMessage">Message <span class="text-danger">*</span></label>
+                <textarea id="contactMessage" class="form-control" rows="5" placeholder="Tell us how we can help…" required minlength="20"></textarea>
+                <div class="invalid-feedback">Message must be at least 20 characters.</div>
+                <div class="d-flex justify-content-end">
+                  <small class="text-muted mt-1" id="charCount">0 / 500</small>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-leaf btn-lg w-100" id="contactSubmitBtn">
+                  <i class="bi bi-send me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Map + Social -->
+      <div class="col-lg-6">
+        <div class="reveal mb-4">
+          <h5 class="font-display mb-3">Find Us on the Map</h5>
+          <div class="map-wrap">
+            <!-- Embedded OpenStreetMap centred on Clifton, Karachi -->
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=67.0%2C24.8%2C67.1%2C24.85&layer=mapnik&marker=24.825%2C67.03"
+              allowfullscreen
+              loading="lazy"
+              title="Verdant Plant Co. location map">
+            </iframe>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h5 class="font-display mb-3">Follow Us</h5>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#" class="social-circle" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-circle" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-circle" aria-label="Twitter / X"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="social-circle" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+            <a href="#" class="social-circle" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="social-circle" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+          </div>
+          <p class="text-muted small mt-3">Tag us <strong>@verdantplants</strong> on Instagram and we'll feature your plants! 🌿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section-pad pt-0 bg-beige">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5 reveal">
+          <span class="eyebrow">Common Questions</span>
+          <h2 class="section-title">FAQ</h2>
+        </div>
+        <div class="d-flex flex-column gap-2 reveal">
+          <details class="faq-item">
+            <summary>How long does delivery take?</summary>
+            <p>We process and dispatch orders within 24 hours. Standard delivery takes 3–5 business days across Pakistan. Express 1–2 day options are available at checkout.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What if my plant arrives damaged?</summary>
+            <p>We guarantee every plant arrives healthy. If yours doesn't, just email us a photo within 48 hours of delivery and we'll replace it or issue a full refund — no questions asked.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do you offer wholesale or bulk pricing?</summary>
+            <p>Yes! We have a dedicated wholesale programme for offices, interior designers, hotels, and event planners. Get in touch via the contact form above, selecting "Wholesale / Bulk Order."</p>
+          </details>
+          <details class="faq-item">
+            <summary>Can I return a plant if I change my mind?</summary>
+            <p>We accept returns within 14 days for unopened, unused items in original packaging. Because plants are living organisms, we assess returns on a case-by-case basis — reach out and we'll help.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do you ship internationally?</summary>
+            <p>Currently we ship within Pakistan only. International shipping involves complex phytosanitary requirements; we're working on it and will announce when available.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="/index.html" class="brand-logo d-inline-block mb-3" style="color:#fff !important;"><i class="bi bi-flower1"></i>Verdant</a>
+        <p class="text-light small">Premium, sustainably grown plants delivered to your door.</p>
+        <div class="footer-social mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/Shop.html">Shop</a></li>
+          <li><a href="/About.html">About</a></li>
+          <li><a href="/Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Categories</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="shop.html?category=Indoor%20Plants">Indoor Plants</a></li>
+          <li><a href="shop.html?category=Succulents">Succulents</a></li>
+          <li><a href="shop.html?category=Hanging%20Plants">Hanging Plants</a></li>
+          <li><a href="shop.html?category=Air%20Purifying%20Plants">Air Purifying</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6>Newsletter</h6>
+        <form class="d-flex gap-2 newsletter-form">
+          <input type="email" class="form-control form-control-sm" placeholder="Email address" required>
+          <button class="btn btn-leaf btn-sm" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom text-center text-light">&copy; 2026 Verdant Plant Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form    = document.getElementById('contactForm');
+  const textarea = document.getElementById('contactMessage');
+  const charCount = document.getElementById('charCount');
+
+  // Live character counter
+  textarea && textarea.addEventListener('input', function () {
+    const len = this.value.length;
+    if (charCount) charCount.textContent = `${len} / 500`;
+    if (len > 500) this.value = this.value.slice(0, 500);
+  });
+
+  // Form submission with validation
+  form && form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let valid = true;
+
+    // Name
+    const name = document.getElementById('contactName');
+    if (!name.value.trim()) { name.classList.add('is-invalid'); valid = false; } else name.classList.remove('is-invalid');
+
+    // Email
+    const email = document.getElementById('contactEmail');
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRx.test(email.value.trim())) { email.classList.add('is-invalid'); valid = false; } else email.classList.remove('is-invalid');
+
+    // Subject
+    const subject = document.getElementById('contactSubject');
+    if (!subject.value) { subject.classList.add('is-invalid'); valid = false; } else subject.classList.remove('is-invalid');
+
+    // Message
+    const msg = document.getElementById('contactMessage');
+    if (msg.value.trim().length < 20) { msg.classList.add('is-invalid'); valid = false; } else msg.classList.remove('is-invalid');
+
+    if (!valid) return;
+
+    const btn = document.getElementById('contactSubmitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending…';
+
+    setTimeout(() => {
+      VERDANT.toast('Message sent! We\'ll get back to you within 24 hours. 🌿', 'success');
+      form.reset();
+      if (charCount) charCount.textContent = '0 / 500';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-send me-2"></i>Send Message';
+    }, 1200);
+  });
+});
+</script>
+
+</body>
+</html>

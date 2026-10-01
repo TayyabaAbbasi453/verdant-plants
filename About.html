@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Verdant</title>
+<meta name="description" content="Learn the story behind Verdant — our mission to make premium plant ownership accessible and sustainable.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+
+<style>
+  .story-img {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lift);
+  }
+  .story-img img { width: 100%; display: block; }
+  .mission-card {
+    border-radius: var(--radius-md);
+    padding: 36px 28px;
+    height: 100%;
+    border: 1px solid var(--border-soft);
+    transition: var(--transition);
+  }
+  .mission-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+  .mission-card.green-tint { background: linear-gradient(135deg, rgba(76,175,80,.08), rgba(46,125,50,.04)); }
+  .mission-card.gold-tint  { background: linear-gradient(135deg, rgba(212,175,55,.08), rgba(212,175,55,.03)); }
+  .mission-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 18px;
+  }
+  .team-card {
+    text-align: center;
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    border: 1px solid var(--border-soft);
+    transition: var(--transition);
+  }
+  .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+  .team-avatar {
+    width: 100px; height: 100px; border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    display: block;
+    border: 3px solid var(--primary-green);
+  }
+  .sustainability-item {
+    display: flex; gap: 18px; padding: 20px;
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    transition: var(--transition);
+  }
+  .sustainability-item:hover { box-shadow: var(--shadow-soft); transform: translateX(4px); }
+  .sus-icon {
+    width: 48px; height: 48px; flex-shrink: 0; border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+    color: #fff; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stats-band {
+    background: linear-gradient(135deg, var(--dark-green), #1b5e20);
+    border-radius: var(--radius-lg);
+    padding: 50px 40px;
+    color: #fff;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .num { font-size: 2.8rem; font-weight: 700; font-family: var(--font-display); }
+  .stat-item .label { opacity: .8; font-size: .9rem; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="page-loader"><i class="bi bi-tree-fill loader-leaf"></i></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand brand-logo" href="/index.html"><i class="bi bi-flower1"></i>Verdant</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"><i class="bi bi-list fs-2"></i></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link active" href="About.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="icon-btn dark-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <a href="Wishlist.html" class="icon-btn position-relative" aria-label="Wishlist">
+          <i class="bi bi-heart"></i><span class="badge-count wishlist-badge" style="display:none;">0</span>
+        </a>
+        <a href="Cart.html" class="icon-btn position-relative" aria-label="Cart">
+          <i class="bi bi-bag"></i><span class="badge-count cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="../Login.html" class="btn btn-leaf btn-sm auth-guest-only">Login</a>
+        <a href="../dashboard.html" class="icon-btn auth-user-only" style="display:none;" aria-label="Dashboard"><i class="bi bi-person"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Band -->
+<header class="page-band">
+  <div class="container">
+    <span class="eyebrow">Our Story</span>
+    <h1 class="section-title">About Verdant</h1>
+    <div class="breadcrumb-custom"><a href="/index.html">Home</a> / <span>About</span></div>
+  </div>
+</header>
+
+<!-- ===== Brand Story ===== -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <div class="story-img">
+          <img src="https://i.pinimg.com/1200x/3d/30/d3/3d30d3e35072205897bb79d0899e887c.jpg" alt="Verdant greenhouse">
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <span class="eyebrow">Founded 2019</span>
+        <h2 class="section-title mt-2">We Started With a Single Leaf</h2>
+        <p class="text-muted">Verdant began in a Karachi apartment with a windowsill of rescued cuttings and a dream: to make premium plant parenthood accessible to everyone. What started as weekend trips to nurseries turned into a curated marketplace connecting plant lovers with the healthiest, most beautiful specimens available.</p>
+        <p class="text-muted">Today we partner with over 40 small-batch growers across South Asia, hand-selecting every variety we carry. Each plant is inspected, hardened off in our facility, and shipped within 24 hours of your order.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="Shop.html" class="btn btn-leaf">Shop Our Plants</a>
+          <a href="Contact.html" class="btn btn-outline-leaf">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Stats ===== -->
+<section class="section-pad pt-0">
+  <div class="container reveal">
+    <div class="stats-band">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-lg-3 stat-item">
+          <div class="num counter-num" data-count="4200" data-suffix="+">0</div>
+          <div class="label">Happy Plant Parents</div>
+        </div>
+        <div class="col-6 col-lg-3 stat-item">
+          <div class="num counter-num" data-count="22" data-suffix="+">0</div>
+          <div class="label">Plant Varieties</div>
+        </div>
+        <div class="col-6 col-lg-3 stat-item">
+          <div class="num counter-num" data-count="40" data-suffix="+">0</div>
+          <div class="label">Partner Growers</div>
+        </div>
+        <div class="col-6 col-lg-3 stat-item">
+          <div class="num counter-num" data-count="98" data-suffix="%">0</div>
+          <div class="label">Satisfaction Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Mission & Vision ===== -->
+<section class="section-pad bg-beige">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">What Drives Us</span>
+      <h2 class="section-title">Mission &amp; Vision</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 reveal">
+        <div class="mission-card green-tint h-100">
+          <div class="mission-icon" style="background:linear-gradient(135deg,var(--primary-green),var(--dark-green)); color:#fff;">
+            <i class="bi bi-bullseye"></i>
+          </div>
+          <h4 class="font-display">Our Mission</h4>
+          <p class="text-muted mb-0">To make nature an everyday luxury — delivering healthy, responsibly grown plants with the same care we'd give our own homes, while building a community where plant parenthood is joyful and approachable for all.</p>
+        </div>
+      </div>
+      <div class="col-md-6 reveal">
+        <div class="mission-card gold-tint h-100">
+          <div class="mission-icon" style="background:linear-gradient(135deg,var(--accent-gold),#b8923f); color:#2b2208;">
+            <i class="bi bi-eye"></i>
+          </div>
+          <h4 class="font-display">Our Vision</h4>
+          <p class="text-muted mb-0">A world where every home has at least one thriving plant — and where that plant came from a grower who was paid fairly, a supply chain that minimised carbon, and a brand that cared about the whole journey from seed to shelf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Sustainability ===== -->
+<section class="section-pad">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 reveal">
+        <span class="eyebrow">Planet First</span>
+        <h2 class="section-title mt-2">Our Commitment to Sustainability</h2>
+        <div class="d-flex flex-column gap-3 mt-4">
+          <div class="sustainability-item">
+            <div class="sus-icon"><i class="bi bi-recycle"></i></div>
+            <div>
+              <strong>100% Recyclable Packaging</strong>
+              <p class="text-muted small mb-0">Every box, liner, and insert we use is either recycled, recyclable, or compostable.</p>
+            </div>
+          </div>
+          <div class="sustainability-item">
+            <div class="sus-icon"><i class="bi bi-tree"></i></div>
+            <div>
+              <strong>Peat-Free Growing</strong>
+              <p class="text-muted small mb-0">We source plants grown in peat-free substrates to protect vital peatland ecosystems.</p>
+            </div>
+          </div>
+          <div class="sustainability-item">
+            <div class="sus-icon"><i class="bi bi-droplet-half"></i></div>
+            <div>
+              <strong>Water-Smart Practices</strong>
+              <p class="text-muted small mb-0">Our partner growers use drip irrigation and rainwater capture to reduce water waste by 60%.</p>
+            </div>
+          </div>
+          <div class="sustainability-item">
+            <div class="sus-icon"><i class="bi bi-patch-check"></i></div>
+            <div>
+              <strong>Fair Trade Partnerships</strong>
+              <p class="text-muted small mb-0">Every grower in our network is vetted for fair wages and ethical working conditions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="story-img">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv1uQSQm8pnyc8y9xvG8oMkxpj6OEPfj3EBswe6Y_CiALErUrZ9edXAkjZ&s=10" alt="Sustainable plant nursery">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Team ===== -->
+<section class="section-pad bg-beige">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <span class="eyebrow">The People</span>
+      <h2 class="section-title">Meet the Team</h2>
+      <p class="section-sub mx-auto">A small, passionate crew obsessed with plants, people, and doing things right.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team1/300/300" alt="Ayesha Rauf" class="team-avatar">
+          <h6 class="font-display mb-0">Ayesha Rauf</h6>
+          <div class="text-muted small mb-2">Co-Founder &amp; CEO</div>
+          <p class="text-muted" style="font-size:.80rem;">"Every plant deserves "</p>
+          <div class="d-flex justify-content-center gap-2">
+            <a href="#" class="icon-btn" style="width:32px;height:32px;"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="icon-btn" style="width:32px;height:32px;"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team2/300/300" alt="Zaid Mirza" class="team-avatar">
+          <h6 class="font-display mb-0">Zaid Mirza</h6>
+          <div class="text-muted small mb-2">Head of Horticulture</div>
+          <p class="text-muted" style="font-size:.80rem;">"A healthy root system"</p>
+          <div class="d-flex justify-content-center gap-2">
+            <a href="#" class="icon-btn" style="width:32px;height:32px;"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team3/300/300" alt="Sara Iqbal" class="team-avatar">
+          <h6 class="font-display mb-0">Sara Iqbal</h6>
+          <div class="text-muted small mb-2">Lead Designer</div>
+          <p class="text-muted" style="font-size:.80rem;">"Beauty in every leaf and pixel."</p>
+          <div class="d-flex justify-content-center gap-2">
+            <a href="#" class="icon-btn" style="width:32px;height:32px;"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="team-card">
+          <img src="https://picsum.photos/seed/team4/300/300" alt="Omar Farooq" class="team-avatar">
+          <h6 class="font-display mb-0">Omar Farooq</h6>
+          <div class="text-muted small mb-2">Logistics &amp; Operations</div>
+          <p class="text-muted" style="font-size:.80rem;">"On time, every time, every leaf."</p>
+          <div class="d-flex justify-content-center gap-2">
+            <a href="#" class="icon-btn" style="width:32px;height:32px;"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-pad">
+  <div class="container reveal">
+    <div class="newsletter-section text-center">
+      <h3 class="font-display mb-2">Ready to Grow with Us?</h3>
+      <p class="opacity-75 mb-4">Shop our collection and let us bring the green into your world.</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="Shop.html" class="btn btn-gold px-4">Shop Now</a>
+        <a href="Contact.html" class="btn btn-outline-light px-4">Contact the Team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="/index.html" class="brand-logo d-inline-block mb-3" style="color:#fff !important;"><i class="bi bi-flower1"></i>Verdant</a>
+        <p class="text-light small">Premium, sustainably grown plants delivered to your door.</p>
+        <div class="footer-social mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="Shop.html">Shop</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Categories</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="Shop.html?category=Indoor%20Plants">Indoor Plants</a></li>
+          <li><a href="Shop.html?category=Succulents">Succulents</a></li>
+          <li><a href="Shop.html?category=Hanging%20Plants">Hanging Plants</a></li>
+          <li><a href="Shop.html?category=Air%20Purifying%20Plants">Air Purifying</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6>Newsletter</h6>
+        <form class="d-flex gap-2 newsletter-form">
+          <input type="email" class="form-control form-control-sm" placeholder="Email address" required>
+          <button class="btn btn-leaf btn-sm" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom text-center text-light">&copy; 2026 Verdant Plant Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>
+<script src="/js/detail.js"></script>
+</body>
+</html>

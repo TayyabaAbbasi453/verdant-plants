@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart — Verdant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+<div class="page-loader"><i class="bi bi-tree-fill loader-leaf"></i></div>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-glass">
+  <div class="container">
+    <a class="navbar-brand brand-logo" href="/index.html"><i class="bi bi-flower1"></i>Verdant</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <i class="bi bi-list fs-2"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="About.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <button class="icon-btn dark-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+        <a href="Wishlist.html" class="icon-btn position-relative" aria-label="Wishlist">
+          <i class="bi bi-heart"></i><span class="badge-count wishlist-badge" style="display:none;">0</span>
+        </a>
+        <a href="Cart.html" class="icon-btn position-relative" aria-label="Cart">
+          <i class="bi bi-bag"></i><span class="badge-count cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="../Login.html" class="btn btn-leaf btn-sm auth-guest-only">Login</a>
+        <a href="../dashboard.html" class="icon-btn auth-user-only" style="display:none;" aria-label="Dashboard"><i class="bi bi-person"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="page-band">
+  <div class="container">
+    <span class="eyebrow">Step 1 of 2</span>
+    <h1 class="section-title">Your Cart</h1>
+    <div class="breadcrumb-custom"><a href="/index.html">Home</a> / <span>Cart</span></div>
+  </div>
+</header>
+
+<section class="section-pad pt-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="bg-white rounded-4 p-4 shadow-sm" style="background:var(--bg);">
+          <div id="cartItemsWrap"></div>
+
+          <div id="cartEmptyState" class="text-center py-5" style="display:none;">
+            <i class="bi bi-bag-x fs-1 text-muted"></i>
+            <h5 class="mt-3">Your cart is empty</h5>
+            <p class="text-muted">Looks like you haven't added any plants yet.</p>
+            <a href="Shop.html" class="btn btn-leaf mt-2">Start Shopping</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="filter-card" id="cartSummary">
+          <h5 class="mb-4">Order Summary</h5>
+
+          <form id="couponForm" class="d-flex gap-2 mb-4">
+            <input type="text" id="couponInput" class="form-control form-control-sm" placeholder="Coupon code">
+            <button class="btn btn-outline-leaf btn-sm" type="submit">Apply</button>
+          </form>
+          <p class="small text-muted mt-n3 mb-3">Try: VERDANT10, GREEN20, WELCOME15</p>
+
+          <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span id="sumSubtotal">$0.00</span></div>
+          <div class="d-flex justify-content-between mb-2"><span class="text-muted">Discount</span><span id="sumDiscount">$0.00</span></div>
+          <div class="d-flex justify-content-between mb-2"><span class="text-muted">Shipping</span><span id="sumShipping">$0.00</span></div>
+          <div class="d-flex justify-content-between mb-3"><span class="text-muted">Tax (5%)</span><span id="sumTax">$0.00</span></div>
+          <hr>
+          <div class="d-flex justify-content-between fs-5 fw-bold mb-1"><span>Total</span><span id="sumTotal">$0.00</span></div>
+          <p class="small text-success" id="shipNote"></p>
+
+          <button class="btn btn-leaf w-100 mt-3" id="checkoutBtn"><i class="bi bi-lock me-2"></i>Proceed to Checkout</button>
+          <a href="Shop.html" class="btn btn-outline-leaf w-100 mt-2">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <a href="/index.html" class="brand-logo d-inline-block mb-3" style="color:#fff !important;"><i class="bi bi-flower1"></i>Verdant</a>
+        <p class="text-light small">Premium, sustainably grown plants delivered straight to your door.</p>
+        <div class="footer-social mt-3">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-pinterest"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="Shop.html">Shop</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Categories</h6>
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li><a href="Pages/Shop.html?category=Indoor%20Plants">Indoor Plants</a></li>
+          <li><a href="Pages/Shop.html?category=Succulents">Succulents</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h6>Newsletter</h6>
+        <form class="d-flex gap-2 newsletter-form">
+          <input type="email" class="form-control form-control-sm" placeholder="Email address" required>
+          <button class="btn btn-leaf btn-sm" type="submit"><i class="bi bi-send"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom text-center text-light">&copy; 2026 Verdant Plant Co. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/wishlist.js"></script>
+<script src="/js/products.js"></script>
+</body>
+</html>
